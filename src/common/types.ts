@@ -22,4 +22,9 @@ export type ConnectionStateType = {
   name: string
 }
 
+export type FilterType = {
+  connectionStateId?: number | undefined
+  departmentId?: number | undefined
+}
+
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

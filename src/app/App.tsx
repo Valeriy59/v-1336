@@ -5,7 +5,9 @@ import { appStatusSelector } from '../common/selectors/appSelector'
 import { useAppSelector } from '../common/hooks/useAppSelector'
 import { getBrigades } from '../features/Brigades/brigadesReducer'
 import { Pages } from './pages/Pages'
-import { Progress } from 'antd'
+import { getDepartments } from '../features/Departments/departmentsReducer'
+import { getConnectionStates } from '../features/ConnectionStates/connectionStatesReducer'
+import { Spin } from 'antd'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -13,11 +15,16 @@ function App() {
 
   useEffect(() => {
     dispatch(getBrigades())
+    dispatch(getDepartments())
+    dispatch(getConnectionStates())
   }, [])
+
   return (
     <div className="App">
-      {status === 'loading' && <Progress showInfo={false} />}
-      <Pages />
+      <Spin size="large" tip="Loading" spinning={status === 'loading'}>
+        {/*{status === 'loading' && <Spin size="large" />}*/}
+        <Pages />
+      </Spin>
     </div>
   )
 }
