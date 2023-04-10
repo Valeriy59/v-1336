@@ -30,7 +30,8 @@ export const BrigadesItem = ({
     <Card
       title={brigade_name}
       bordered={true}
-      style={{ width: '250px', margin: '10px' }}
+      // style={s.card}
+      className={s.card}
       bodyStyle={{ padding: '12px' }}
       headStyle={{ padding: '12px', fontSize: '14px' }}
       size={'small'}

@@ -5,5 +5,10 @@
     background-color: white;
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 40px;
+}
+
+@media (max-width: 560px) {
+    .filterContainer {
+        flex-wrap: wrap;
+    }
 }
