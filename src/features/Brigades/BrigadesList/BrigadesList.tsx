@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { getFilteredBrigades } from '../brigadesReducer'
 
 export const BrigadesList = () => {
-  const { brigades } = useAppSelector(brigadesSelector)
+  const { filteredBrigades } = useAppSelector(brigadesSelector)
   const { filter } = useAppSelector(brigadesSelector)
   const dispatch = useAppDispatch()
 
@@ -16,7 +16,7 @@ export const BrigadesList = () => {
   }, [filter])
   return (
     <div className={s.container}>
-      {brigades.map((item) => (
+      {filteredBrigades.map((item) => (
         <BrigadesItem
           key={item.id}
           id={item.id}

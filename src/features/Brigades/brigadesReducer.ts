@@ -11,7 +11,7 @@ const initialState = {
     connectionStateId: null,
     departmentId: null,
   } as FilterType,
-  viewBrigades: [] as BrigadeType[],
+  filteredBrigades: [] as BrigadeType[],
 }
 export const brigadesSlice = createSlice({
   name: 'brigades',
@@ -23,7 +23,6 @@ export const brigadesSlice = createSlice({
     setFilterDepartment: (state, action: PayloadAction<{ filter: FilterType }>) => {
       state.filter = {
         ...state.filter,
-        // connectionStateId: action.payload.filter.connectionStateId,
         departmentId: action.payload.filter.departmentId,
       }
     },
@@ -33,10 +32,14 @@ export const brigadesSlice = createSlice({
         connectionStateId: action.payload.filter.connectionStateId,
       }
     },
+    setFilteredBrigades: (state, action: PayloadAction<{ filteredBrigades: BrigadeType[] }>) => {
+      state.filteredBrigades = action.payload.filteredBrigades
+    },
   },
 })
 
-export const { setBrigades, setFilterDepartment, setFilterConnection } = brigadesSlice.actions
+export const { setBrigades, setFilterDepartment, setFilterConnection, setFilteredBrigades } =
+  brigadesSlice.actions
 export const brigadesReducer = brigadesSlice.reducer
 
 export const getBrigades = createAsyncThunk('brigades/getBrigades', async (_, { dispatch }) => {
@@ -45,6 +48,7 @@ export const getBrigades = createAsyncThunk('brigades/getBrigades', async (_, { 
     let { data } = await brigadesApi.getBrigades()
 
     dispatch(setBrigades({ brigades: data }))
+    dispatch(setFilteredBrigades({ filteredBrigades: data }))
     dispatch(setAppStatus('succeeded'))
   } catch (e) {
     errorNetworkUtil(dispatch, e)
@@ -56,18 +60,22 @@ export const getFilteredBrigades = createAsyncThunk(
   async (_, { dispatch, getState }) => {
     const state = getState() as AppRootStateType
     const filter = state.brigades.filter
+    const brigades = state.brigades.brigades
+    let filteredBrigades = brigades
     dispatch(setAppStatus('loading'))
     try {
-      let { data } = await brigadesApi.getBrigades()
+      // let { data } = await brigadesApi.getBrigades()
       if (typeof filter.departmentId != 'number') {
       } else {
-        data = data.filter((el) => el.department.id === filter.departmentId)
+        filteredBrigades = brigades.filter((el) => el.department.id === filter.departmentId)
       }
       if (typeof filter.connectionStateId != 'number') {
       } else {
-        data = data.filter((el) => el.connectionStateId === filter.connectionStateId)
+        filteredBrigades = filteredBrigades.filter(
+          (el) => el.connectionStateId === filter.connectionStateId
+        )
       }
-      dispatch(setBrigades({ brigades: data }))
+      dispatch(setFilteredBrigades({ filteredBrigades: filteredBrigades }))
 
       dispatch(setAppStatus('succeeded'))
     } catch (e) {
