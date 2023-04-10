@@ -3,7 +3,7 @@ import { Select } from 'antd'
 import { useAppSelector } from '../../common/hooks/useAppSelector'
 import { departmentsSelector } from '../../common/selectors/departmentsSelector'
 import { useAppDispatch } from '../../common/hooks/useAppDispatch'
-import { getFilteredBrigades, setFilter } from '../Brigades/brigadesReducer'
+import { setFilter } from '../Brigades/brigadesReducer'
 import s from './Departments.module.css'
 
 export const Departments = () => {
@@ -14,7 +14,7 @@ export const Departments = () => {
   const handleChange = (value: number | undefined) => {
     // if (value !== undefined) {
     dispatch(setFilter({ filter: { departmentId: value } }))
-    dispatch(getFilteredBrigades())
+
     // }
     console.log('departmentId' + ' ' + value)
   }
@@ -23,7 +23,7 @@ export const Departments = () => {
     <div className={s.container}>
       <span className={s.text}>Департамент:</span>
       <Select
-        defaultValue={undefined}
+        defaultValue={null}
         style={{ width: 220 }}
         allowClear
         options={options}

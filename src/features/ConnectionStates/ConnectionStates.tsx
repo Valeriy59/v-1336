@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppSelector } from '../../common/hooks/useAppSelector'
 import { useAppDispatch } from '../../common/hooks/useAppDispatch'
-import { getFilteredBrigades, setFilter1 } from '../Brigades/brigadesReducer'
+import { setFilter1 } from '../Brigades/brigadesReducer'
 import { Select } from 'antd'
 import { connectionStatesSelector } from '../../common/selectors/connectionStatesSelector'
 import s from './ConnectionState.module.css'
@@ -13,10 +13,10 @@ export const ConnectionStates = () => {
     value: connection.connectionStateId,
     label: connection.name,
   }))
-  const handleChange = (value: number | undefined) => {
+  const handleChange = (value: number | null) => {
     // if (value !== undefined) {
     dispatch(setFilter1({ filter: { connectionStateId: value } }))
-    dispatch(getFilteredBrigades())
+    // dispatch(getFilteredBrigades())
     // }
 
     console.log('connectionStateId' + ' ' + value)
@@ -26,7 +26,7 @@ export const ConnectionStates = () => {
     <div className={s.container}>
       <span className={s.text}>Соединение:</span>
       <Select
-        defaultValue={undefined}
+        defaultValue={null}
         style={{ width: 220 }}
         allowClear
         options={options}
