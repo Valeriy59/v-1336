@@ -8,10 +8,14 @@ import { Pages } from './pages/Pages'
 import { getDepartments } from '../features/Departments/departmentsReducer'
 import { getConnectionStates } from '../features/ConnectionStates/connectionStatesReducer'
 import { Spin } from 'antd'
+import { useAppNotification } from './hooks/useAppNotification'
 
 function App() {
   const dispatch = useAppDispatch()
   const status = useAppSelector(appStatusSelector)
+  const { message, notify, contextHolder } = useAppNotification()
+
+  if (message) notify()
 
   useEffect(() => {
     dispatch(getBrigades())
@@ -22,7 +26,7 @@ function App() {
   return (
     <div className="App">
       <Spin size="large" tip="Loading" spinning={status === 'loading'}>
-        {/*{status === 'loading' && <Spin size="large" />}*/}
+        {contextHolder}
         <Pages />
       </Spin>
     </div>

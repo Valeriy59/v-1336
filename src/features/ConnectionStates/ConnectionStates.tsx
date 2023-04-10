@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppSelector } from '../../common/hooks/useAppSelector'
 import { useAppDispatch } from '../../common/hooks/useAppDispatch'
-import { setFilter1 } from '../Brigades/brigadesReducer'
+import { setFilterConnection } from '../Brigades/brigadesReducer'
 import { Select } from 'antd'
 import { connectionStatesSelector } from '../../common/selectors/connectionStatesSelector'
 import s from './ConnectionState.module.css'
@@ -14,12 +14,7 @@ export const ConnectionStates = () => {
     label: connection.name,
   }))
   const handleChange = (value: number | null) => {
-    // if (value !== undefined) {
-    dispatch(setFilter1({ filter: { connectionStateId: value } }))
-    // dispatch(getFilteredBrigades())
-    // }
-
-    console.log('connectionStateId' + ' ' + value)
+    dispatch(setFilterConnection({ filter: { connectionStateId: value } }))
   }
 
   return (

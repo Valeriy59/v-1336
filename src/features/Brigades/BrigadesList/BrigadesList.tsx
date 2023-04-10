@@ -10,14 +10,13 @@ export const BrigadesList = () => {
   const { brigades } = useAppSelector(brigadesSelector)
   const { filter } = useAppSelector(brigadesSelector)
   const dispatch = useAppDispatch()
-  // const status = useAppSelector(appStatusSelector)
+
   useEffect(() => {
     dispatch(getFilteredBrigades())
   }, [filter])
   return (
     <div className={s.container}>
       {brigades.map((item) => (
-        // <Skeleton loading={status === 'loading'}>
         <BrigadesItem
           key={item.id}
           id={item.id}
@@ -28,7 +27,6 @@ export const BrigadesList = () => {
           field={item.position.field}
           well={item.position.well}
         />
-        // </Skeleton>
       ))}
     </div>
   )

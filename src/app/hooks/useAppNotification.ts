@@ -2,20 +2,21 @@ import { useAppSelector } from '../../common/hooks/useAppSelector'
 import { setAppMessage } from '../appSlice'
 import { useAppDispatch } from '../../common/hooks/useAppDispatch'
 import { appMessageSelector } from '../../common/selectors/appSelector'
+import { notification } from 'antd'
 
-export const useNotification = () => {
+export const useAppNotification = () => {
   const dispatch = useAppDispatch()
   const message = useAppSelector(appMessageSelector)
-
-  // const { colorMode } = useColorMode()
+  const [api, contextHolder] = notification.useNotification()
 
   const notify = () => {
-    // toast.info(message, {
-    //   position: toast.POSITION.TOP_CENTER,
-    //   theme: colorMode,
-    // })
+    api.info({
+      message: `Notification`,
+      description: message,
+      placement: 'bottomLeft',
+    })
     dispatch(setAppMessage(null))
   }
 
-  return { message, notify }
+  return { message, notify, contextHolder }
 }
