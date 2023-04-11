@@ -3,7 +3,7 @@ import './App.css'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
 import { appStatusSelector } from '../common/selectors/appSelector'
 import { useAppSelector } from '../common/hooks/useAppSelector'
-import { getBrigades, getFilteredBrigades } from '../features/Brigades/brigadesReducer'
+import { getBrigades } from '../features/Brigades/brigadesReducer'
 import { Pages } from './pages/Pages'
 import { getDepartments } from '../features/Departments/departmentsReducer'
 import { getConnectionStates } from '../features/ConnectionStates/connectionStatesReducer'
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getBrigades())
-    dispatch(getFilteredBrigades())
+    // dispatch(getFilteredBrigades())
     dispatch(getDepartments())
     dispatch(getConnectionStates())
   }, [])
