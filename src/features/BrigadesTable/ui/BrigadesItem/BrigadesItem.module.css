@@ -1,0 +1,48 @@
+.card {
+    width: 250px;
+    margin: 10px
+}
+@media (max-width: 560px) {
+    .card {
+        width: 210px;
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 560px) {
+    .card {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+.title {
+    font-size: 14px;
+    color: #000000d9;
+    font-weight: 500;
+}
+
+.department {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: #000000d9;
+    font-weight: 500;
+    font-size: 16px;
+}
+.text {
+    font-weight: bolder;
+    color: #000000d9;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    font-feature-settings: "tnum";
+}
+
+.paragraph {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-wrap: wrap;
+    }
+}
