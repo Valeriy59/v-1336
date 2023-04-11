@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { appReducer } from './appSlice'
-import { brigadesReducer } from '../features/Brigades/brigadesReducer'
-import { departmentsReducer } from '../features/Departments/departmentsReducer'
-import { connectionStatesReducer } from '../features/ConnectionStates/connectionStatesReducer'
+import { brigadesReducer } from '../features/BrigadesTable/state/brigadesReducer'
+import { departmentsReducer } from '../features/FilterPanel/state/departmentsReducer'
+import { connectionStatesReducer } from '../features/FilterPanel/state/connectionStatesReducer'
 
 export const store = configureStore({
   reducer: {
